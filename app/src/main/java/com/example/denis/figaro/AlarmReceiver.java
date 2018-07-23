@@ -10,6 +10,6 @@ public class AlarmReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
 
-        Toast.makeText(context, "Figaro Here, Figaro There!", Toast.LENGTH_LONG).show();
+        Toast.makeText(context, context.getString(R.string.figaro_msg), Toast.LENGTH_LONG).show();
     }
 }

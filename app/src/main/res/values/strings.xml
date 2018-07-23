@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Figaro</string>
+    <string name="figaro_msg">Figaro Here, Figaro There!</string>
 </resources>

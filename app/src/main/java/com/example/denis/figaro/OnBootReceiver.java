@@ -11,6 +11,7 @@ import android.widget.Toast;
 public class OnBootReceiver extends BroadcastReceiver {
 
 
+    // Each 30 seconds
     private static final int PERIOD =  30 * 1000;
 
     @Override
@@ -21,14 +22,17 @@ public class OnBootReceiver extends BroadcastReceiver {
             return;
 
 
-        // each PERIOD we want to fire an action described in AlarmReceiver's receiver
+        // pendingIntent to slap AlarmReceiver
         Intent alarmIntent = new Intent(context, AlarmReceiver.class);
         PendingIntent pendingIntent = PendingIntent.getBroadcast(context, 0, alarmIntent, 0);
 
         AlarmManager alarmMgr = (AlarmManager)context.getSystemService(Context.ALARM_SERVICE);
         if (alarmMgr != null) {
-            // ELAPSED_REALTIME is used, as we want to show Toast, but with dimmed screen it doesn't make sense.
+            // each PERIOD we want to fire an pendingIntent.
             alarmMgr.setInexactRepeating(
+                    // ELAPSED_REALTIME alarm does not wake the device up; if it goes off while the device
+                    // is asleep, it will not be delivered until the next time the device
+                    // wakes up.
                     AlarmManager.ELAPSED_REALTIME,
                     SystemClock.elapsedRealtime(),
                     PERIOD,
